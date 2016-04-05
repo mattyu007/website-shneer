@@ -314,7 +314,7 @@ function createSceneGraph() {
             context.save();
             
             // Render the word "shneer"
-            context.font = "100% sans-serif";
+            context.font = "100% 'Karla', sans-serif";
             context.textAlign = "center";
             context.textBaseline = "middle";
             context.fillStyle = this.color;
