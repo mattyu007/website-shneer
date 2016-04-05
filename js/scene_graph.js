@@ -10,8 +10,8 @@ function createSceneGraph() {
     /**
      * The abstract base scene graph node.
      * 
-     * @param {string} id a node identifier
-     * @param {GraphNode?} parent the parent node
+     * @param id a node identifier
+     * @param parent the parent node
      */
     var GraphNode = function(id, parent) {
         // An identifier for this node.
@@ -264,7 +264,30 @@ function createSceneGraph() {
         }
     });
     
+    
+    /**
+     * The root node of the scene.
+     * 
+     * @param id a node identifier
+     * @param parent the parent node
+     */
+    var RootNode = function(id, parent) {
+        // Inherit the constructor of GraphNode
+        GraphNode.apply(id, parent);
+        
+        // Override the local bounding box
+        this.localBoundingBox = {
+            x: 0,
+            y: 0,
+            w: 800,
+            h: 600
+        };
+    };
+    
+    // Inherit the other methods of GraphNode
+    _.extend(RootNode.prototype, GraphNode.prototype);
+    
     return {
-        GraphNode: GraphNode
+        RootNode: RootNode
     }
 }
