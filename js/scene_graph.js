@@ -273,7 +273,7 @@ function createSceneGraph() {
      */
     var RootNode = function(id, parent) {
         // Inherit the constructor of GraphNode
-        GraphNode.apply(id, parent);
+        GraphNode.apply(this, arguments);
         
         // Override the local bounding box
         this.localBoundingBox = {
@@ -295,7 +295,7 @@ function createSceneGraph() {
      * @param parent the parent node
      */
     var ShneerNode = function(id, parent) {
-        GraphNode.apply(id, parent);
+        GraphNode.apply(this, arguments);
         
         // Override the local bounding box        
         this.localBoundingBox = {

@@ -6,7 +6,7 @@
  * Based on view.js from cs349-specia, scaffolded by the course IAs.
  */
 
-function createView() {
+function createViewModule() {
     var ShneerView = function(model, canvas) {
         var self = this;
         
@@ -31,4 +31,8 @@ function createView() {
             node.addListener(self);
         });
     }
+    
+    return {
+        ShneerView: ShneerView
+    };
 }

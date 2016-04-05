@@ -6,7 +6,7 @@
  * Based on model.js from cs349-specia, scaffolded by the course IAs.
  */
 
-function createModel() {
+function createModelModule() {
     var ShneerModel = function() {
         var self = this;
         
@@ -20,13 +20,14 @@ function createModel() {
         this.rootNode = new sceneGraphModule.RootNode("scene");
         
         // Create the Shneer nodes
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 10; i++) {
             var node = new sceneGraphModule.ShneerNode("shneer" + i, this.rootNode);
             
             // Scale and translate the node randomly
+            var factor = Math.random() * 5;
             node.scale(
-                Math.random(),
-                Math.random()
+                factor,
+                factor
             );
             node.translate(
                 Math.random() * (this.rootNode.localBoundingBox.x + this.rootNode.localBoundingBox.w),
@@ -105,16 +106,27 @@ function createModel() {
         var tick = function() {
             _.each(self.nodes, function(node) {
                 // Translate the node to the left
-                node.translate(-1, 0);
+                node.translate(-5, 0);
                 
                 // Check if the node has fallen off the canvas
                 var visibility = visibilityInScene(node);
-                if (visibility.visibilityInScene == NodeVisibility.EXCEEDED_LEFT) {
+                if (visibility.visibility == NodeVisibility.EXCEEDED_LEFT) {
                     // Translate the node back to the right
-                    node.translateAsGlobal(self.rootNode.localBoundingBox.w + visibility.globalWidth)
+                    node.translateAsGlobal(self.rootNode.localBoundingBox.w + visibility.globalWidth, 0);
+                    
+                    // Randomly change the y-coordinate of the node as well
+                    node.translateAsGlobal(0, (Math.random > 0.5 ? -1 : 1) * Math.random() * self.rootNode.localBoundingBox.h);
+                }
+                if (visibility.visibility == NodeVisibility.EXCEEDED_BOTTOM) {
+                    node.translateAsGlobal(0, Math.random() * -self.rootNode.localBoundingBox.h);
+                }
+                else if (visibility.visibility == NodeVisibility.EXCEEDED_TOP) {
+                    node.translateAsGlobal(0, Math.random * self.rootNode.localBoundingBox.h);
                 }
             });
         }
+        
+        setInterval(tick, 16);
     }
     
     _.extend(ShneerModel.prototype, {
@@ -132,4 +144,8 @@ function createModel() {
             // TODO
         }
     });
+    
+    return {
+        ShneerModel: ShneerModel
+    };
 }
