@@ -11,29 +11,17 @@ function createModelModule() {
         var self = this;
         
         // Create the scene graph module
-        var sceneGraphModule = createSceneGraph();
+        this.sceneGraphModule = createSceneGraph();
         
         // The list of nodes
         this.nodes = [];
         
         // Create the scene graph
-        this.rootNode = new sceneGraphModule.RootNode("scene");
+        this.rootNode = new this.sceneGraphModule.RootNode("scene");
         
         // Create the Shneer nodes
         for (var i = 0; i < 10; i++) {
-            var node = new sceneGraphModule.ShneerNode("shneer" + i, this.rootNode);
-            
-            // Scale and translate the node randomly
-            var factor = Math.random() * 5;
-            node.scale(
-                factor,
-                factor
-            );
-            node.translate(
-                Math.random() * (this.rootNode.localBoundingBox.x + this.rootNode.localBoundingBox.w),
-                Math.random() * (this.rootNode.localBoundingBox.y + this.rootNode.localBoundingBox.h) 
-            );
-            
+            var node = new this.sceneGraphModule.ShneerNode("shneer" + i, this.rootNode);
             this.nodes.push(node);
         }
         
@@ -132,9 +120,14 @@ function createModelModule() {
     _.extend(ShneerModel.prototype, {
         /**
          * Add a new Shneer node to the scene.
+         * 
+         * @param listener the view to be notified of changes
          */
-        addShneer: function() {
-            // TODO
+        addShneer: function(listener) {
+            var node = new this.sceneGraphModule.ShneerNode("shneer", this.rootNode);
+            node.addListener(listener);
+            
+            this.nodes.push(node);
         },
         
         /**

@@ -343,6 +343,17 @@ function createSceneGraph() {
             h: 20
         };
         
+        // Randomly scale and translate the node
+        var factor = Math.random() * 5;
+        this.scale(
+            factor,
+            factor
+        );
+        this.translate(
+            Math.random() * (this.parent.localBoundingBox.x + this.parent.localBoundingBox.w),
+            Math.random() * (this.parent.localBoundingBox.y + this.parent.localBoundingBox.h) 
+        );
+        
         // Select a random colour for this shneer
         this.color = "hsl(" + Math.floor(Math.random() * 360) + ", 100%, 60%)";
     }

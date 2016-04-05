@@ -9,4 +9,9 @@ window.addEventListener("load", function() {
     var canvas = document.getElementById("canvas");
     var model = new modelModule.ShneerModel();
     var view = new viewModule.ShneerView(model, canvas);
+    
+    // Hook up the Add Shneer button
+    document.getElementById("add-shneer").addEventListener("click", function() {
+        model.addShneer(view);
+    });
 })

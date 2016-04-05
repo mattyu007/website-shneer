@@ -48,6 +48,7 @@ a.disabled {
 	border-radius: 4px;
 	padding: 3px 8px 5px;
 	margin: 4px 2px;
+    cursor: pointer;
 	font: inherit;
 	text-align: center;
 	vertical-align: middle;
@@ -65,14 +66,14 @@ a.disabled {
     margin-right: -50%;
     transform: translate(-50%, 0);
     
-    border: 1px solid hsl(0, 0%, 80%);;
+    border: 1px solid hsl(0, 0%, 80%);
 }
 
-#return-to-main {
+#buttons {
     position: fixed;
     bottom: 20px;
     left: 50%;
-    width: 200px;
+    width: 400px;
     text-align: center;
-    margin-left: -100px;
+    margin-left: -200px;
 }
