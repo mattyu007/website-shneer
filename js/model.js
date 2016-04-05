@@ -93,6 +93,8 @@ function createModelModule() {
         // The animation loop
         var tick = function() {
             _.each(self.nodes, function(node) {
+                node.shouldNotifyListeners = false;
+                
                 // Translate the node to the left
                 node.translate(-3, 0);
                 
@@ -111,7 +113,11 @@ function createModelModule() {
                 else if (status.visibility == NodeVisibility.EXCEEDED_TOP) {
                     node.translateAsGlobal(0, Math.random * self.rootNode.localBoundingBox.h);
                 }
+                
+                node.shouldNotifyListeners = true;
             });
+            
+            self.rootNode.notify();
             
             window.requestAnimationFrame(tick);
         }

@@ -27,6 +27,7 @@ function createViewModule() {
         }
         
         // Add the view as a listener to all the nodes
+        this.model.rootNode.addListener(this);
         _.each(this.model.nodes, function(node) {
             node.addListener(self);
         });

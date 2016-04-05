@@ -45,6 +45,9 @@ function createSceneGraph() {
         
         // A list of listeners.
         this.listeners = [];
+        
+        // Whether this node should notify its listeners of updates.
+        this.shouldNotifyListeners = true;
     }
     
     _.extend(GraphNode.prototype, {
@@ -52,9 +55,11 @@ function createSceneGraph() {
          * Notify all listeners to update due to a change in this node.
          */
         notify: function() {
-            _.each(this.listeners, function(listener) {
-                listener.update();
-            });
+            if (this.shouldNotifyListeners) {
+                _.each(this.listeners, function(listener) {
+                    listener.update();
+                });
+            }
         },
         
         /**
