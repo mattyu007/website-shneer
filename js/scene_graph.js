@@ -7,6 +7,8 @@
  */
 function createSceneGraph() {
     
+    var SG_DEBUG_SHOW_BOUNDING_BOXES = false;
+    
     /**
      * The abstract base scene graph node.
      * 
@@ -177,6 +179,42 @@ function createSceneGraph() {
             // Render this node
             this.renderLocal(context);
             
+            if (SG_DEBUG_SHOW_BOUNDING_BOXES) {
+                context.save();
+
+                // Draw the origin
+                context.strokeStyle = this.color ? this.color : "black";
+                context.beginPath();
+                context.lineWidth = 2;
+                context.moveTo(-4,  4);
+                context.lineTo( 4, -4);
+                context.moveTo( 4,  4);
+                context.lineTo(-4, -4);
+                context.stroke();
+
+                // Draw the bounding rect
+                context.strokeStyle = this.color ? this.color : "black";
+                context.lineWidth = 1;
+                context.strokeRect(
+                    /* x */ this.localBoundingBox.x,
+                    /* y */ this.localBoundingBox.y,
+                    /* w */ this.localBoundingBox.w,
+                    /* h */ this.localBoundingBox.h
+                );
+
+                // Label the item
+                context.font = "100% 'Karla', sans-serif";
+                context.textAlign = "right";
+                context.textBaseline = "middle";
+                context.fillStyle = this._debug_colour;
+                context.fillText(
+                    /* string */ ' ' + this.id + ' ',
+                    /* x      */ this.localBoundingBox.x,
+                    /* y      */ this.localBoundingBox.y);
+
+                context.restore();
+            }
+            
             // Render each child recursively
             _.each(this.children, function(child) {
                 child.renderAll(context);
@@ -299,10 +337,10 @@ function createSceneGraph() {
         
         // Override the local bounding box        
         this.localBoundingBox = {
-            x: -50,
-            y: -15,
-            w: 100,
-            h: 30
+            x: -30,
+            y: -10,
+            w: 60,
+            h: 20
         };
         
         // Select a random colour for this shneer
@@ -320,8 +358,8 @@ function createSceneGraph() {
             context.fillStyle = this.color;
             context.fillText(
                 /* string */ "shneer",
-                /* x      */ this.localBoundingBox.x,
-                /* y      */ this.localBoundingBox.y
+                /* x      */ this.localBoundingBox.x + this.localBoundingBox.w / 2,
+                /* y      */ this.localBoundingBox.y + this.localBoundingBox.h / 2
             )
             
             context.restore();
