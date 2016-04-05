@@ -112,9 +112,11 @@ function createModelModule() {
                     node.translateAsGlobal(0, Math.random * self.rootNode.localBoundingBox.h);
                 }
             });
+            
+            window.requestAnimationFrame(tick);
         }
         
-        setInterval(tick, 16);
+        window.requestAnimationFrame(tick);
     }
     
     _.extend(ShneerModel.prototype, {
@@ -135,6 +137,18 @@ function createModelModule() {
          */
         removeShneer: function() {
             // TODO
+        },
+        
+        /**
+         * Resize the root node.
+         * 
+         * @param width the target width
+         * @param height the target height
+         */
+        resizeScene: function(width, height) {
+            // Resize the root node
+            this.rootNode.localBoundingBox.w = width;
+            this.rootNode.localBoundingBox.h = height;
         }
     });
     

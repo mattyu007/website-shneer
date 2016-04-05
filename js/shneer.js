@@ -1,5 +1,6 @@
 "use strict";
 
+var _view;
 window.addEventListener("load", function() {
     // Create the model and the view modules
     var modelModule = createModelModule();
@@ -9,9 +10,18 @@ window.addEventListener("load", function() {
     var canvas = document.getElementById("canvas");
     var model = new modelModule.ShneerModel();
     var view = new viewModule.ShneerView(model, canvas);
+    _view = view;
     
     // Hook up the Add Shneer button
     document.getElementById("add-shneer").addEventListener("click", function() {
         model.addShneer(view);
     });
+    
+    // Resize the canvas to fit the viewport exactly
+    var resizeHandler = function() {
+        view.resize(window.innerWidth, window.innerHeight);
+    };
+    window.addEventListener("resize", resizeHandler);
+    
+    resizeHandler();
 })

@@ -32,6 +32,23 @@ function createViewModule() {
         });
     }
     
+    _.extend(ShneerView.prototype, {
+        /**
+         * Resize the view.
+         * 
+         * @param width the target width for the canvas
+         * @param height the target height for the canvas
+         */
+        resize: function(width, height) {
+            // Resize the canvas
+            this.canvas.width = width;
+            this.canvas.height = height;
+            
+            // Tell the model to resize the root node 
+            this.model.resizeScene(width, height);
+        }
+    });
+    
     return {
         ShneerView: ShneerView
     };
