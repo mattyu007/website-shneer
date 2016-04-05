@@ -109,18 +109,18 @@ function createModelModule() {
                 node.translate(-3, 0);
                 
                 // Check if the node has fallen off the canvas
-                var visibility = visibilityInScene(node);
-                if (visibility.visibility == NodeVisibility.EXCEEDED_LEFT) {
+                var status = visibilityInScene(node);
+                if (status.visibility == NodeVisibility.EXCEEDED_LEFT) {
                     // Translate the node back to the right
-                    node.translateAsGlobal(self.rootNode.localBoundingBox.w + visibility.globalWidth, 0);
+                    node.translateAsGlobal(self.rootNode.localBoundingBox.w + status.globalWidth, 0);
                     
                     // Randomly change the y-coordinate of the node as well
                     node.translateAsGlobal(0, (Math.random > 0.5 ? -1 : 1) * Math.random() * self.rootNode.localBoundingBox.h);
                 }
-                if (visibility.visibility == NodeVisibility.EXCEEDED_BOTTOM) {
+                if (status.visibility == NodeVisibility.EXCEEDED_BOTTOM) {
                     node.translateAsGlobal(0, Math.random() * -self.rootNode.localBoundingBox.h);
                 }
-                else if (visibility.visibility == NodeVisibility.EXCEEDED_TOP) {
+                else if (status.visibility == NodeVisibility.EXCEEDED_TOP) {
                     node.translateAsGlobal(0, Math.random * self.rootNode.localBoundingBox.h);
                 }
             });
