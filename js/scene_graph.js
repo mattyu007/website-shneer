@@ -287,7 +287,49 @@ function createSceneGraph() {
     // Inherit the other methods of GraphNode
     _.extend(RootNode.prototype, GraphNode.prototype);
     
+    
+    /**
+     * A text node with the text "shneer".
+     * 
+     * @param id a node identifier
+     * @param parent the parent node
+     */
+    var ShneerNode = function(id, parent) {
+        GraphNode.apply(id, parent);
+        
+        // Override the local bounding box        
+        this.localBoundingBox = {
+            x: -50,
+            y: -15,
+            w: 100,
+            h: 30
+        };
+        
+        // Select a random colour for this shneer
+        this.color = "hsl(" + Math.floor(Math.random() * 360) + ", 100%, 60%)";
+    }
+    
+    _.extend(ShneerNode.prototype, GraphNode.prototype, {
+        renderLocal: function(context) {
+            context.save();
+            
+            // Render the word "shneer"
+            context.font = "100% sans-serif";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            context.fillStyle = this.color;
+            context.fillText(
+                /* string */ "shneer",
+                /* x      */ this.localBoundingBox.x,
+                /* y      */ this.localBoundingBox.y
+            )
+            
+            context.restore();
+        }
+    });
+    
     return {
-        RootNode: RootNode
+        RootNode: RootNode,
+        ShneerNode: ShneerNode
     }
 }
