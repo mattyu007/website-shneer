@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Create and return the scene graph classes.
