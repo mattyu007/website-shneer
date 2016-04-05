@@ -279,7 +279,7 @@ function createSceneGraph() {
         this.localBoundingBox = {
             x: 0,
             y: 0,
-            w: 800,
+            w: 1000,
             h: 600
         };
     };
