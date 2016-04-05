@@ -60,10 +60,12 @@ a.disabled {
 /* ==================== Shneer ==================== */
 #canvas {
     position: absolute;
-    top: 50%;
+    top: 40px;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
+    
+    border: 1px solid hsl(0, 0%, 80%);;
 }
 
 #return-to-main {

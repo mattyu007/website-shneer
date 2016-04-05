@@ -106,7 +106,7 @@ function createModelModule() {
         var tick = function() {
             _.each(self.nodes, function(node) {
                 // Translate the node to the left
-                node.translate(-5, 0);
+                node.translate(-3, 0);
                 
                 // Check if the node has fallen off the canvas
                 var visibility = visibilityInScene(node);
