@@ -142,7 +142,17 @@ function createModelModule() {
          * Remove a Shneer node from the scene, if any exist.
          */
         removeShneer: function() {
-            // TODO
+            if (this.nodes.length > 0) {
+                var nodeToRemove = this.nodes[0];
+                
+                // Remove the node as a child from its parent
+                if (nodeToRemove.parent) {
+                    nodeToRemove.parent.removeChild(nodeToRemove);
+                }
+                
+                // Remove the node from the model
+                this.nodes = _.without(this.nodes, this.nodes[0]);
+            }
         },
         
         /**

@@ -17,6 +17,11 @@ window.addEventListener("load", function() {
         model.addShneer(view);
     });
     
+    // Hook up the Remove Shneer button
+    document.getElementById("remove-shneer").addEventListener("click", function() {
+        model.removeShneer();
+    })
+    
     // Resize the canvas to fit the viewport exactly
     var resizeHandler = function() {
         view.resize(window.innerWidth, window.innerHeight);
