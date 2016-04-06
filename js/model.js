@@ -13,16 +13,16 @@ function createModelModule() {
         // Create the scene graph module
         this.sceneGraphModule = createSceneGraph();
         
-        // The list of nodes
-        this.nodes = [];
+        // The list of Shneer nodes
+        this.shneerNodes = [];
         
         // Create the scene graph
         this.rootNode = new this.sceneGraphModule.RootNode("scene");
         
         // Create the Shneer nodes
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 25; i++) {
             var node = new this.sceneGraphModule.ShneerNode("shneer" + i, this.rootNode);
-            this.nodes.push(node);
+            this.shneerNodes.push(node);
         }
         
         // Function to determine if a node is inside the scene bounding box
@@ -92,7 +92,7 @@ function createModelModule() {
         
         // The animation loop
         var tick = function() {
-            _.each(self.nodes, function(node) {
+            _.each(self.shneerNodes, function(node) {
                 node.shouldNotifyListeners = false;
                 
                 // Translate the node to the left
@@ -105,13 +105,13 @@ function createModelModule() {
                     node.translateAsGlobal(self.rootNode.localBoundingBox.w + status.globalWidth, 0);
                     
                     // Randomly change the y-coordinate of the node as well
-                    node.translateAsGlobal(0, (Math.random > 0.5 ? -1 : 1) * Math.random() * self.rootNode.localBoundingBox.h);
+                    node.translateAsGlobal(0, Math.random() * self.rootNode.localBoundingBox.h);
                 }
                 if (status.visibility == NodeVisibility.EXCEEDED_BOTTOM) {
-                    node.translateAsGlobal(0, Math.random() * -self.rootNode.localBoundingBox.h);
+                    node.translateAsGlobal(0, -self.rootNode.localBoundingBox.h);
                 }
                 else if (status.visibility == NodeVisibility.EXCEEDED_TOP) {
-                    node.translateAsGlobal(0, Math.random * self.rootNode.localBoundingBox.h);
+                    node.translateAsGlobal(0, self.rootNode.localBoundingBox.h);
                 }
                 
                 node.shouldNotifyListeners = true;
@@ -135,15 +135,15 @@ function createModelModule() {
             var node = new this.sceneGraphModule.ShneerNode("shneer", this.rootNode);
             node.addListener(listener);
             
-            this.nodes.push(node);
+            this.shneerNodes.push(node);
         },
         
         /**
          * Remove a Shneer node from the scene, if any exist.
          */
         removeShneer: function() {
-            if (this.nodes.length > 0) {
-                var nodeToRemove = this.nodes[0];
+            if (this.shneerNodes.length > 0) {
+                var nodeToRemove = this.shneerNodes[0];
                 
                 // Remove the node as a child from its parent
                 if (nodeToRemove.parent) {
@@ -151,7 +151,7 @@ function createModelModule() {
                 }
                 
                 // Remove the node from the model
-                this.nodes = _.without(this.nodes, this.nodes[0]);
+                this.shneerNodes = _.without(this.shneerNodes, this.shneerNodes[0]);
             }
         },
         
