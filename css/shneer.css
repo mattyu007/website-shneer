@@ -45,7 +45,7 @@ a.disabled {
 }
 
 .btn {
-    background: transparent;
+    background: hsla(0, 0%, 92.5%, 0.75);
 	border: 1px solid blue;
 	border-radius: 4px;
 	padding: 3px 8px 5px;
@@ -58,7 +58,7 @@ a.disabled {
 }
 
 .btn:hover {
-	background-color: rgba(0, 0, 255, 0.1);
+	background-color: hsla(0, 0%, 85%, 0.75);
 }
 
 /* ==================== Shneer ==================== */
