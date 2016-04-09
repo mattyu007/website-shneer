@@ -211,7 +211,7 @@ function createSceneGraph() {
                 context.font = "100% 'Karla', sans-serif";
                 context.textAlign = "right";
                 context.textBaseline = "middle";
-                context.fillStyle = this._debug_colour;
+                context.fillStyle = this.color ? this.color : "black";
                 context.fillText(
                     /* string */ ' ' + this.id + ' ',
                     /* x      */ this.localBoundingBox.x,
