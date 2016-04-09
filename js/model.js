@@ -132,7 +132,11 @@ function createModelModule() {
          * @param listener the view to be notified of changes
          */
         addShneer: function(listener) {
-            var node = new this.sceneGraphModule.ShneerNode("shneer", this.rootNode);
+            // Number this node accordingly
+            var previous = this.shneerNodes.length > 0
+                ? parseInt(this.shneerNodes[this.shneerNodes.length - 1].id.match(/^shneer(.+)$/)[1], 10) || 0
+                : 0;
+            var node = new this.sceneGraphModule.ShneerNode("shneer" + (previous + 1), this.rootNode);
             node.addListener(listener);
             
             this.shneerNodes.push(node);
